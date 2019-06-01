@@ -12,7 +12,7 @@ module.exports = {
         try{
 
             pool.query('SELECT to_char("fecha", \'YYYY-MM-DD\') as fecha, importe FROM recaudaciones ' +
-                'WHERE moneda = \'113\' ;')
+                'WHERE moneda = \'113\' order by fecha;')
                 .then(response => {
                     console.log(response.rows);
                     res.send(response.rows);
@@ -30,7 +30,8 @@ module.exports = {
         console.log(anio);
         try{
 
-            pool.query(`select to_char("fecha", 'YYYY-MM-DD') as fecha, importe from recaudaciones where moneda = '113' and date_part('year', fecha) = '${anio}'`)
+            pool.query(`select to_char("fecha", 'YYYY-MM-DD') as fecha, importe from recaudaciones  
+                where moneda = '113' and date_part('year', fecha) = '${anio}' order by fecha`)
               .then(response => {
                 console.log(response.rows);
                   res.send(response.rows);
@@ -53,7 +54,7 @@ module.exports = {
             pool.query(`select to_char("fecha", 'YYYY-MM-DD') as fecha, importe from recaudaciones
             where moneda = '113'
             and date_part('year', fecha) = '${anio}'
-            and date_part('month', fecha) = '${mes}'`)
+            and date_part('month', fecha) = '${mes}' order by fecha`)
                 .then(response => {
                     console.log(response.rows);
                     res.send(response.rows);
@@ -79,7 +80,7 @@ module.exports = {
             where moneda = '113'
             and date_part('year', fecha) = '${anio}'
             and date_part('month', fecha) = '${mes}'
-            and date_part('day', fecha) = '${dia}'`)
+            and date_part('day', fecha) = '${dia}' order by fecha`)
                 .then(response => {
                     console.log(response.rows);
                     res.send(response.rows);
