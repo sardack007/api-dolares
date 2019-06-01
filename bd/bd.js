@@ -15,7 +15,7 @@ module.exports = {
         try{
             client.connect();
             client.query('SELECT fecha, importe FROM recaudaciones ' +
-                'WHERE moneda = \'113\' limit 10 ;')
+                'WHERE moneda = \'113\' ;')
                 .then(response => {
                     console.log(response.rows);
                     res.send(response.rows);
