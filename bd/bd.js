@@ -1,28 +1,25 @@
-const { Client } = require('pg');
-const connectionData = {
+const Pool = require('pg').Pool;
+const pool = new Pool({
     user: 'modulo4',
     host: '67.205.143.180',
     database: 'tcs2',
     password: 'modulo4',
     port: 5432,
-}
-const client = new Client(connectionData);
-
-
+});
 
 module.exports = {
     getTodo: async (req, res) => {
         try{
-            client.connect();
-            client.query('SELECT fecha, importe FROM recaudaciones ' +
+
+            pool.query('SELECT fecha, importe FROM recaudaciones ' +
                 'WHERE moneda = \'113\' ;')
                 .then(response => {
                     console.log(response.rows);
                     res.send(response.rows);
-                    client.end();
+
                 })
                 .catch(err => {
-                    client.end()
+                    console.log(err)
                 })
         }catch (e) {
             throw new Error(e);
@@ -32,15 +29,14 @@ module.exports = {
         const anio = req.params.anio;
         console.log(anio);
         try{
-          client.connect();
-          client.query(`select fecha, importe from recaudaciones where moneda = '113' and date_part('year', fecha) = '${anio}'`)
+
+            pool.query(`select fecha, importe from recaudaciones where moneda = '113' and date_part('year', fecha) = '${anio}'`)
               .then(response => {
                 console.log(response.rows);
                   res.send(response.rows);
-                client.end();
               })
               .catch(err => {
-                client.end()
+                console.log(err)
               })
         }catch (e) {
           throw new Error(e);
@@ -53,18 +49,18 @@ module.exports = {
         const mes = fecha[1];
         console.log(mes);
         try{
-            client.connect();
-            client.query(`select fecha, importe from recaudaciones
+
+            pool.query(`select fecha, importe from recaudaciones
             where moneda = '113'
             and date_part('year', fecha) = '${anio}'
             and date_part('month', fecha) = '${mes}'`)
                 .then(response => {
                     console.log(response.rows);
                     res.send(response.rows);
-                    client.end();
+
                 })
                 .catch(err => {
-                    client.end()
+                    console.log(err)
                 })
         }catch (e) {
             throw new Error(e);
@@ -78,8 +74,8 @@ module.exports = {
         const dia = fecha[2];
         console.log(mes);
         try{
-            client.connect();
-            client.query(`select fecha, importe from recaudaciones
+
+            pool.query(`select fecha, importe from recaudaciones
             where moneda = '113'
             and date_part('year', fecha) = '${anio}'
             and date_part('month', fecha) = '${mes}'
@@ -87,10 +83,10 @@ module.exports = {
                 .then(response => {
                     console.log(response.rows);
                     res.send(response.rows);
-                    client.end();
+
                 })
                 .catch(err => {
-                    client.end()
+                    console.log(err)
                 })
         }catch (e) {
             throw new Error(e);
