@@ -11,7 +11,7 @@ module.exports = {
     getTodo: async (req, res) => {
         try{
 
-            pool.query('SELECT fecha, importe FROM recaudaciones ' +
+            pool.query('SELECT to_char("fecha", \'YYYY-MM-DD\') as fecha, importe FROM recaudaciones ' +
                 'WHERE moneda = \'113\' ;')
                 .then(response => {
                     console.log(response.rows);
@@ -30,7 +30,7 @@ module.exports = {
         console.log(anio);
         try{
 
-            pool.query(`select fecha, importe from recaudaciones where moneda = '113' and date_part('year', fecha) = '${anio}'`)
+            pool.query(`select to_char("fecha", 'YYYY-MM-DD') as fecha, importe from recaudaciones where moneda = '113' and date_part('year', fecha) = '${anio}'`)
               .then(response => {
                 console.log(response.rows);
                   res.send(response.rows);
@@ -50,7 +50,7 @@ module.exports = {
         console.log(mes);
         try{
 
-            pool.query(`select fecha, importe from recaudaciones
+            pool.query(`select to_char("fecha", 'YYYY-MM-DD') as fecha, importe from recaudaciones
             where moneda = '113'
             and date_part('year', fecha) = '${anio}'
             and date_part('month', fecha) = '${mes}'`)
@@ -75,7 +75,7 @@ module.exports = {
         console.log(mes);
         try{
 
-            pool.query(`select fecha, importe from recaudaciones
+            pool.query(`select to_char("fecha", 'YYYY-MM-DD') as fecha, importe from recaudaciones
             where moneda = '113'
             and date_part('year', fecha) = '${anio}'
             and date_part('month', fecha) = '${mes}'
