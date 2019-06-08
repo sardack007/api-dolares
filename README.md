@@ -17,3 +17,6 @@ Para obtener por dia:
 https://api-dolares.herokuapp.com/api/dia/:fecha
 ejm:
 https://api-dolares.herokuapp.com/api/dia/2009-01-21
+
+Para obtener las fechas de importes en dolares que no estan en la tabla tipo cambio
+https://api-dolares.herokuapp.com/api/fecha_importe_dolares
