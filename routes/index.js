@@ -19,5 +19,8 @@ router.get('/api/dia/:fecha', function(req, res, next) {
 router.get('/api/fecha_importe_dolares', function(req, res, next) {
   cliente.getFechaImporteDolares(req,res);
 });
+router.get('/api/tipo_cambio', function(req, res, next) {
+  cliente.getTipoCambio(req,res);
+});
 
 module.exports = router;

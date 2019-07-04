@@ -108,6 +108,20 @@ module.exports = {
         }catch (e) {
             throw new Error(e);
         }
+    },
+    getTipoCambio: async (req,res) => {
+        try {
+            pool.query(`SELECT to_char("fecha", 'YYYY-MM-DD') as fecha, compra, venta FROM tipo_cambio`)
+                .then(response => {
+                    res.status(200).send(response.rows);
+                })
+                .catch(err => {
+                    console.log(err);
+                })
+        }catch (e) {
+            throw new Error(e);
+        }
     }
+
 };
 
